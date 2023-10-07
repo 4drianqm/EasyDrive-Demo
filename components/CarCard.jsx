@@ -1,13 +1,20 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import { PiSteeringWheelFill } from "react-icons/pi";
 import { FaGasPump } from "react-icons/fa";
 
 const CarCard = (props) => {
-  const [car, setCar] = useState(props.car);
-  return (
+  const [car, setCar] = useState();
+
+  useEffect(()=>{
+    if(props.car){
+      setCar(props.car)
+    }
+  },[props.car])
+
+  return car&&(
     <div
       className="group bg-gray-50 p-2 sm:p-5 rounded-3xl m-1 sm:m-5
     hover:bg-white 
