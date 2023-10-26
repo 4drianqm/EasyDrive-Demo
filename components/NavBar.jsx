@@ -1,10 +1,12 @@
+"use client"
 import { SignInButton, SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
 import React from "react";
 import { AiFillCar } from "react-icons/ai";
 import Link from "next/link";
-
+import AdminButton from './AdminButton'
 
 const NavBar = () => {
+
   return (
     <div className="flex justify-between items-center shadow-md">
       <div className="flex items-center ml-3 font-bold text-lg">
@@ -12,6 +14,7 @@ const NavBar = () => {
         <Link href={"/"}>EASY DRIVE</Link>
       </div>
       <div className="mr-3 my-3">
+        <AdminButton/>
         <SignedIn>
           <UserButton />
         </SignedIn>
