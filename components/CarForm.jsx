@@ -1,7 +1,26 @@
-import React from "react";
+import {React, useState} from "react";
 
 const CarForm = () => {
   const today = new Date();
+  const [formValue, setFormValue] = useState({
+    location: '',
+    pickUpDate: '',
+    dropOffDate: '',
+    pickUpTime: '',
+    dropOffTime: '',
+    contactNumber: ''
+  })
+
+  const handleChange = (event)=>{
+    setFormValue({
+      ...formValue,
+      [event.target.name]: event.target.value
+    });
+  }
+
+  const handleSubmit = ()=>{
+    console.log(formValue);
+  }
   return (
     <div>
       <div className="flex flex-col w-full mb-5">
@@ -10,6 +29,7 @@ const CarForm = () => {
           className="select 
         select-bordered w-full max-w-lg"
           name="location"
+          onChange={handleChange}
         >
           <option disabled selected>
             PickUp Location?
@@ -26,6 +46,7 @@ const CarForm = () => {
             min={today}
             placeholder="Type here"
             name="pickUpDate"
+            onChange={handleChange}
             className="input input-bordered w-full max-w-lg"
           />
         </div>
@@ -35,6 +56,7 @@ const CarForm = () => {
             type="date"
             placeholder="Type here"
             name="dropOffDate"
+            onChange={handleChange}
             className="input input-bordered w-full max-w-lg"
           />
         </div>
@@ -46,6 +68,7 @@ const CarForm = () => {
           <input
             type="time"
             name="pickUpTime"
+            onChange={handleChange}
             placeholder="Type here"
             className="input input-bordered w-full max-w-lg"
           />
@@ -55,6 +78,7 @@ const CarForm = () => {
           <input
             type="time"
             name="dropOffTime"
+            onChange={handleChange}
             placeholder="Type here"
             className="input input-bordered w-full max-w-lg"
           />
@@ -66,12 +90,14 @@ const CarForm = () => {
           type="text"
           placeholder="Type here"
           name="contactNumber"
+          onChange={handleChange}
           className="input input-bordered w-full max-w-lg"
         />
       </div>
       <div className="modal-action">
         <button className="btn">Close</button>
-        <button className="btn bg-blue-500 text-white hover:bg-blue-800">
+        <button className="btn bg-blue-500 text-white hover:bg-blue-800"
+        onClick={handleSubmit}>
           Save
         </button>
       </div>

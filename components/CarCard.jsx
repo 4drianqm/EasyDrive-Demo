@@ -29,7 +29,7 @@ const CarCard = (props) => {
         <span className="text-[12px] font-light">/day</span>
       </h2>
       <Image
-        src={"/carimage.png"}
+        src={car.imageUrl}
         alt={car.Make}
         width={220}
         height={200}
