@@ -1,26 +1,26 @@
-import {React, useState} from "react";
+import { React, useState } from "react";
 
 const CarForm = () => {
   const today = new Date();
   const [formValue, setFormValue] = useState({
-    location: '',
-    pickUpDate: '',
-    dropOffDate: '',
-    pickUpTime: '',
-    dropOffTime: '',
-    contactNumber: ''
-  })
+    location: "",
+    pickUpDate: "",
+    dropOffDate: "",
+    pickUpTime: "",
+    dropOffTime: "",
+    contactNumber: "",
+  });
 
-  const handleChange = (event)=>{
+  const handleChange = (event) => {
     setFormValue({
       ...formValue,
-      [event.target.name]: event.target.value
+      [event.target.name]: event.target.value,
     });
-  }
+  };
 
-  const handleSubmit = ()=>{
+  const handleSubmit = () => {
     console.log(formValue);
-  }
+  };
   return (
     <div>
       <div className="flex flex-col w-full mb-5">
@@ -96,8 +96,23 @@ const CarForm = () => {
       </div>
       <div className="modal-action">
         <button className="btn">Close</button>
-        <button className="btn bg-blue-500 text-white hover:bg-blue-800"
-        onClick={handleSubmit}>
+        <button
+          className="btn bg-blue-500 text-white hover:bg-blue-800"
+          onClick={() => {
+            handleSubmit();
+            setTimeout(() => {
+              fetch("/api/send", {
+                method: "POST",
+                headers: {
+                  "Content-Type": "application/json"
+                },
+                body:JSON.stringify(formValue)
+              })
+                .then((res) => res.json())
+                .then((data) => console.log(data));
+            }, 1);
+          }}
+        >
           Save
         </button>
       </div>
